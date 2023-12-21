@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tech-challenge-app
+  name: tech-challenge-order-app
   namespace: tech-challenge-namespace
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tech-challenge-app
+      app: tech-challenge-order-app
   template:
     metadata:
       labels:
-        app: tech-challenge-app
+        app: tech-challenge-order-app
     spec:
       containers:
         - name: app
-          image: 653185900972.dkr.ecr.us-east-1.amazonaws.com/tech-challenge:latest
+          image: 653185900972.dkr.ecr.us-east-1.amazonaws.com/tech-challenge:order-latest
           ports:
             - containerPort: 8080
           livenessProbe:
@@ -28,28 +28,28 @@ spec:
             - name: DB_SERVER
               valueFrom:
                 configMapKeyRef:
-                  name: postgres-config-map
-                  key: postgres-server
+                  name: postgres-order-config-map
+                  key: postgres-order-server
             - name: DB_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: postgres-config-map
-                  key: postgres-port
+                  name: postgres-order-config-map
+                  key: postgres-order-port
             - name: DB_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: postgres-config-map
-                  key: postgres-database-name
+                  name: postgres-order-config-map
+                  key: postgres-order-database-name
             - name: DB_USERNAME
               valueFrom:
                 configMapKeyRef:
-                  name: postgres-config-map
-                  key: postgres-user-username
+                  name: postgres-order-config-map
+                  key: postgres-order-user-username
             - name: DB_PASSWORD
               valueFrom:
                 configMapKeyRef:
-                  name: postgres-config-map
-                  key: postgres-user-password
+                  name: postgres-order-config-map
+                  key: postgres-order-user-password
 ---
 apiVersion: v1
 kind: Service
@@ -58,7 +58,7 @@ metadata:
   namespace: tech-challenge-namespace
 spec:
   selector:
-    app: tech-challenge-app
+    app: tech-challenge-order-app
   ports:
     - protocol: TCP
       port: 80
