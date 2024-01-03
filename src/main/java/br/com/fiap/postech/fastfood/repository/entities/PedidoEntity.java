@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.repository.entities;
 
-import br.com.fiap.postech.fastfood.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.domain.enums.PedidoStatus;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -34,9 +33,6 @@ public class PedidoEntity {
     @Column
     private PedidoStatus pedidoStatus;
 
-    @Enumerated(EnumType.STRING)
-    @Column
-    private PagamentoStatus pagamentoStatus;
 
     @Column
     private BigDecimal valorTotal;
@@ -47,16 +43,8 @@ public class PedidoEntity {
     @Column
     private LocalDateTime dataAtualizacao;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private ClienteEntity cliente;
-
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedidoEntity> items;
-
-    @OneToOne
-    @JoinColumn(name = "pagamento_entity_id")
-    private PagamentoEntity pagamentoEntity;
 
     @Override
     public String toString() {
@@ -65,13 +53,10 @@ public class PedidoEntity {
             ", numeroPedido='" + numeroPedido + '\'' +
             ", cpf='" + cpf + '\'' +
             ", pedidoStatus=" + pedidoStatus +
-            ", pagamentoStatus=" + pagamentoStatus +
             ", valorTotal=" + valorTotal +
             ", dataPedido=" + dataPedido +
             ", dataAtualizacao=" + dataAtualizacao +
-            ", cliente=" + (cliente != null ? cliente.getId() : null) + // Evita a recursão infinita
             ", items=" + items +
-            ", pagamentoEntity=" + (pagamentoEntity != null ? pagamentoEntity.getId() : null) + // Evita a recursão infinita
             '}';
     }
 
