@@ -2,7 +2,6 @@ package br.com.fiap.postech.fastfood.usecases.pedido.impl;
 
 import br.com.fiap.postech.fastfood.controller.dto.UpdatePedidoRequest;
 import br.com.fiap.postech.fastfood.domain.pedido.Pedido;
-import br.com.fiap.postech.fastfood.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.domain.enums.PedidoStatus;
 import br.com.fiap.postech.fastfood.ports.pedido.PedidoPersistencePort;
 import br.com.fiap.postech.fastfood.usecases.pedido.AtualizarPedidoUseCase;
@@ -48,9 +47,9 @@ public class AtualizarPedidoUseCaseImpl implements AtualizarPedidoUseCase {
     // Perform additional validation based on the new status
     if (newStatus == PedidoStatus.ANDAMENTO) {
       // Check if the Pagamento status is APROVADO
-      if (existingPedido.getStatusPagamento() != PagamentoStatus.APROVADO) {
-        throw new IllegalStateException("Cannot update Pedido to EM_ANDAMENTO unless Pagamento status is APROVADO.");
-      }
+      //if (existingPedido.getStatusPagamento() != PagamentoStatus.APROVADO) {
+      //  throw new IllegalStateException("Cannot update Pedido to EM_ANDAMENTO unless Pagamento status is APROVADO.");
+     // }
     }
 
     // Update the Pedido

@@ -1,16 +1,9 @@
 package br.com.fiap.postech.fastfood.config;
 
 import br.com.fiap.postech.fastfood.FastfoodApplication;
-import br.com.fiap.postech.fastfood.ports.cliente.ClientePersistencePort;
 import br.com.fiap.postech.fastfood.ports.item.ItemPersistencePort;
 import br.com.fiap.postech.fastfood.ports.itempedido.ItemPedidoPersistencePort;
-import br.com.fiap.postech.fastfood.ports.pagamento.MetodoPagamentoPersistencePort;
-import br.com.fiap.postech.fastfood.ports.pagamento.PagamentoPersistencePort;
 import br.com.fiap.postech.fastfood.ports.pedido.PedidoPersistencePort;
-import br.com.fiap.postech.fastfood.usecases.cliente.BuscarClienteUseCase;
-import br.com.fiap.postech.fastfood.usecases.cliente.CriarClienteUseCase;
-import br.com.fiap.postech.fastfood.usecases.cliente.impl.BuscarClienteUseCaseImpl;
-import br.com.fiap.postech.fastfood.usecases.cliente.impl.CriarClienteUseCaseImpl;
 import br.com.fiap.postech.fastfood.usecases.item.impl.AtualizarItemUseCaseImpl;
 import br.com.fiap.postech.fastfood.usecases.item.impl.BuscarItemUseCaseImpl;
 import br.com.fiap.postech.fastfood.usecases.item.impl.CriarItemUseCaseImpl;
@@ -23,8 +16,6 @@ import br.com.fiap.postech.fastfood.usecases.itempedido.impl.AdicionarItemPedido
 import br.com.fiap.postech.fastfood.usecases.itempedido.impl.AtualizarItemPedidoUseCaseImpl;
 import br.com.fiap.postech.fastfood.usecases.itempedido.impl.BuscarItemPedidoUseCaseImpl;
 import br.com.fiap.postech.fastfood.usecases.itempedido.impl.DeletarItemPedidoUseCaseImpl;
-import br.com.fiap.postech.fastfood.usecases.pagamento.*;
-import br.com.fiap.postech.fastfood.usecases.pagamento.impl.*;
 import br.com.fiap.postech.fastfood.usecases.pedido.impl.AtualizarPedidoUseCaseImpl;
 import br.com.fiap.postech.fastfood.usecases.pedido.impl.BuscarPedidoParaEntregaUseCaseImpl;
 import br.com.fiap.postech.fastfood.usecases.pedido.impl.BuscarPedidoUseCaseImpl;
@@ -41,16 +32,6 @@ public class BeanConfig {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
-    }
-
-    @Bean
-    public CriarClienteUseCase criarClienteUseCase(ClientePersistencePort persistence) {
-        return new CriarClienteUseCaseImpl(persistence);
-    }
-
-    @Bean
-    public BuscarClienteUseCase buscarClienteUseCase(ClientePersistencePort persistence) {
-        return new BuscarClienteUseCaseImpl(persistence);
     }
 
     @Bean
@@ -93,20 +74,6 @@ public class BeanConfig {
         return new DeletarItemUseCaseImpl(persistence);
     }
 
-    @Bean
-    public CriarPagamentoUseCase criarPagamentoUseCase(PagamentoPersistencePort persistence) {
-        return new CriarPagamentoUseCaseImpl(persistence);
-    }
-
-    @Bean
-    public BuscarPagamentoUseCase buscarPagamentoUseCase(PagamentoPersistencePort persistence) {
-        return new BuscarPagamentoUseCaseImpl(persistence);
-    }
-
-    @Bean
-    public AtualizarStatusPagamentoUseCase atualizarStatusPagamentoUseCase(PagamentoPersistencePort persistence) {
-        return new AtualizarStatusPagamentoUseCaseImpl(persistence);
-    }
 
     @Bean
     public AdicionarItemPedidoUseCase adicionarItemPedidoUseCase(ItemPedidoPersistencePort persistence) {
@@ -128,20 +95,5 @@ public class BeanConfig {
         return new BuscarItemPedidoUseCaseImpl(persistence);
     }
 
-
-    @Bean
-    public CriarMetodoPagamentoUseCase criarMetodoPagamentoUseCase(MetodoPagamentoPersistencePort persistence) {
-        return new CriarMetodoPagamentoUseCaseImpl(persistence);
-    }
-
-    @Bean
-    public BuscarMetodoPagamentoUseCase buscarMetodoPagamentoUseCase(MetodoPagamentoPersistencePort persistence) {
-        return new BuscarMetodoPagamentoUseCaseImpl(persistence);
-    }
-
-    @Bean
-    public DeletarMetodoPagamentoUseCase deletarMetodoPagamentoUseCase(MetodoPagamentoPersistencePort persistence) {
-        return new DeletarMetodoPagamentoUseCaseImpl(persistence);
-    }
 
 }

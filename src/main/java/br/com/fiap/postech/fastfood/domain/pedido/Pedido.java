@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.domain.pedido;
 
-import br.com.fiap.postech.fastfood.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.domain.enums.PedidoStatus;
 import br.com.fiap.postech.fastfood.domain.itempedido.ItemPedido;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -21,7 +20,6 @@ public class Pedido {
 
     String numeroPedido;
     PedidoStatus statusPedido;
-    PagamentoStatus statusPagamento;
     BigDecimal valorTotal;
     String cpf;
     LocalDateTime dataPedido;
