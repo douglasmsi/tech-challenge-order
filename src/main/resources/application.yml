@@ -27,11 +27,3 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-
-
-  cloud:
-    openfeign:
-      client:
-        config:
-          tech-challenge-client: http://tech-challenge-client-alb.tech-challenge-namespace.svc.cluster.local:8080
-          tech-challenge-payment: http://tech-challenge-payment-alb.tech-challenge-namespace.svc.cluster.local:8080
