@@ -9,7 +9,6 @@ public class ClienteService {
 
   private final TechChallengeClient techChallengeClient;
 
-
   public ClienteService(TechChallengeClient techChallengeClient) {
     this.techChallengeClient = techChallengeClient;
   }
