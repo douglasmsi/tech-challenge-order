@@ -2,7 +2,6 @@ package br.com.fiap.postech.fastfood.controller.pedido;
 
 import br.com.fiap.postech.fastfood.controller.dto.ErrorResponse;
 import br.com.fiap.postech.fastfood.controller.dto.UpdatePedidoRequest;
-import br.com.fiap.postech.fastfood.domain.cliente.Cliente;
 import br.com.fiap.postech.fastfood.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.domain.pedido.Pedido;
 import br.com.fiap.postech.fastfood.usecases.pedido.AtualizarPedidoUseCase;
@@ -59,15 +58,15 @@ public class PedidoController implements PedidoControllerSwagger {
     }
 
     @PostMapping(value = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createPedido(@RequestBody Cliente request) {
+    public ResponseEntity<Object> createPedido(@RequestBody String cpf) {
         try {
             // Verifique se o CPF foi fornecido
-            if (request.getCpf() == null || request.getCpf().isEmpty()) {
+            if (cpf == null || cpf.isEmpty()) {
                 ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_WITHOUT_CPF_REQUEST.getMessage());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
             }
 
-            Pedido createdPedido = criarPedidoUseCase.createPedido(request);
+            Pedido createdPedido = criarPedidoUseCase.createPedido(cpf);
 
             if (createdPedido == null) {
                 ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_CREATION_FAILED.getMessage());
