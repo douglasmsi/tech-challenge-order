@@ -3,7 +3,7 @@ kind: ServiceAccount
 metadata:
   labels:
     k8s-app: metrics-server
-  name: metrics-server
+  name: metrics-server-order
   namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -14,7 +14,7 @@ metadata:
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-view: "true"
-  name: system:aggregated-metrics-reader
+  name: system:aggregated-metrics-reader-order
 rules:
   - apiGroups:
       - metrics.k8s.io
@@ -31,7 +31,7 @@ kind: ClusterRole
 metadata:
   labels:
     k8s-app: metrics-server
-  name: system:metrics-server
+  name: system:metrics-server-order
 rules:
   - apiGroups:
       - ""
@@ -51,7 +51,7 @@ kind: RoleBinding
 metadata:
   labels:
     k8s-app: metrics-server
-  name: metrics-server-auth-reader
+  name: metrics-server-auth-reader-order
   namespace: kube-system
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -59,7 +59,7 @@ roleRef:
   name: extension-apiserver-authentication-reader
 subjects:
   - kind: ServiceAccount
-    name: metrics-server
+    name: metrics-server-order
     namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -71,10 +71,10 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: system:auth-delegator
+  name: system:auth-delegator-order
 subjects:
   - kind: ServiceAccount
-    name: metrics-server
+    name: metrics-server-order
     namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -82,14 +82,14 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     k8s-app: metrics-server
-  name: system:metrics-server
+  name: system:metrics-server-order
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: system:metrics-server
+  name: system:metrics-server-order
 subjects:
   - kind: ServiceAccount
-    name: metrics-server
+    name: metrics-server-order
     namespace: kube-system
 ---
 apiVersion: v1
@@ -97,7 +97,7 @@ kind: Service
 metadata:
   labels:
     k8s-app: metrics-server
-  name: metrics-server
+  name: metrics-server-order
   namespace: kube-system
 spec:
   ports:
@@ -113,7 +113,7 @@ kind: Deployment
 metadata:
   labels:
     k8s-app: metrics-server
-  name: metrics-server
+  name: metrics-server-order
   namespace: kube-system
 spec:
   selector:
@@ -143,7 +143,7 @@ spec:
               port: https
               scheme: HTTPS
             periodSeconds: 10
-          name: metrics-server
+          name: metrics-server-order
           ports:
             - containerPort: 4443
               name: https
@@ -165,7 +165,7 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       priorityClassName: system-cluster-critical
-      serviceAccountName: metrics-server
+      serviceAccountName: metrics-server-order
       volumes:
         - emptyDir: {}
           name: tmp-dir
@@ -181,7 +181,7 @@ spec:
   groupPriorityMinimum: 100
   insecureSkipTLSVerify: true
   service:
-    name: metrics-server
+    name: metrics-server-order
     namespace: kube-system
   version: v1beta1
   versionPriority: 100
