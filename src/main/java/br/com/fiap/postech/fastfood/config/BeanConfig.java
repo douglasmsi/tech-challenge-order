@@ -1,6 +1,6 @@
 package br.com.fiap.postech.fastfood.config;
 
-import br.com.fiap.postech.fastfood.FastfoodApplication;
+import br.com.fiap.postech.fastfood.TechChallengeOrderApplication;
 import br.com.fiap.postech.fastfood.ports.item.ItemPersistencePort;
 import br.com.fiap.postech.fastfood.ports.itempedido.ItemPedidoPersistencePort;
 import br.com.fiap.postech.fastfood.ports.pedido.PedidoPersistencePort;
@@ -26,7 +26,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackageClasses = FastfoodApplication.class)
+@ComponentScan(basePackageClasses = TechChallengeOrderApplication.class)
 public class BeanConfig {
 
     @Bean
