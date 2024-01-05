@@ -8,10 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-public class FastfoodApplication {
+public class TechChallengeOrderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FastfoodApplication.class, args);
+		SpringApplication.run(TechChallengeOrderApplication.class, args);
 	}
 
 }
