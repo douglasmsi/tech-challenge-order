@@ -13,6 +13,7 @@ spec:
       labels:
         app: tech-challenge-order-app
     spec:
+      serviceAccountName: metrics-server
       containers:
         - name: app
           image: 653185900972.dkr.ecr.us-east-1.amazonaws.com/tech-challenge:order-latest
