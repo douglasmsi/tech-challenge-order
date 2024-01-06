@@ -38,7 +38,6 @@ spring:
         enabled: true
       discovery:
         all-namespaces: false
-        namespaces:
-          - tech-challenge-namespace
+        enabled: false
     compatibility-verifier:
       enabled: false
