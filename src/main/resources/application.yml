@@ -31,8 +31,14 @@ spring:
 
 
   cloud:
-    loadbalancer:
-      ribbon:
+    kubernetes:
+      client:
+        namespace: tech-challenge-namespace
+      reload:
         enabled: true
+      discovery:
+        all-namespaces: false
+        namespaces:
+          - tech-challenge-namespace
     compatibility-verifier:
       enabled: false
