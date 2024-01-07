@@ -48,3 +48,8 @@ spring:
     openfeign:
       httpclient:
         enabled: true
+
+logging:
+  level:
+    org.springframework: DEBUG  # Configurando nível de log DEBUG para Spring
+    org.hibernate: DEBUG  # Configurando nível de log DEBUG para Hibernate
