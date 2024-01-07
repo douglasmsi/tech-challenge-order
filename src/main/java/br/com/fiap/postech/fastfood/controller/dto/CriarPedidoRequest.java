@@ -1,14 +1,16 @@
 package br.com.fiap.postech.fastfood.controller.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@Builder
+@Data
+@NoArgsConstructor
 public class CriarPedidoRequest {
 
-  private String clienteCpf;
+  private String cpf;
 
 }

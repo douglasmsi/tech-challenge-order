@@ -59,15 +59,15 @@ public class PedidoController implements PedidoControllerSwagger {
     }
 
     @PostMapping(value = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createPedido(@RequestBody CriarPedidoRequest cpf) {
+    public ResponseEntity<Object> createPedido(@RequestBody CriarPedidoRequest pedidoRequest) {
         try {
             // Verifique se o CPF foi fornecido
-            if (cpf == null || cpf.getClienteCpf().isEmpty()) {
+            if (pedidoRequest == null || pedidoRequest.getCpf().isEmpty()) {
                 ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_WITHOUT_CPF_REQUEST.getMessage());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
             }
 
-            Pedido createdPedido = criarPedidoUseCase.createPedido(cpf.getClienteCpf());
+            Pedido createdPedido = criarPedidoUseCase.createPedido(pedidoRequest.getCpf());
 
             if (createdPedido == null) {
                 ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_CREATION_FAILED.getMessage());
