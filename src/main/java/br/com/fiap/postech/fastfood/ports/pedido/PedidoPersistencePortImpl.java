@@ -1,5 +1,7 @@
 package br.com.fiap.postech.fastfood.ports.pedido;
 
+import static br.com.fiap.postech.fastfood.utils.loghelper.LogHelper.atLog;
+
 import br.com.fiap.postech.fastfood.controller.dto.UpdatePedidoRequest;
 import br.com.fiap.postech.fastfood.domain.enums.PedidoStatus;
 import br.com.fiap.postech.fastfood.domain.pedido.Pedido;
@@ -13,6 +15,8 @@ import br.com.fiap.postech.fastfood.usecases.pedido.PedidoNumberGenerator;
 import br.com.fiap.postech.fastfood.usecases.pedido.impl.PedidoNumberGeneratorImpl;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.query.sql.NativeQueryLogging;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +24,11 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
+
 public class PedidoPersistencePortImpl implements PedidoPersistencePort {
+
+    private final String classe = "PedidoPersistencePortImpl";
 
     private final PedidoJpaRepository pedidoJpaRepository;
     private final ItemJpaRepository itemJpaRepository;
@@ -31,6 +39,7 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
 
     @Override
     public Pedido createPedido(final String cpf) {
+        atLog(log).info(String.format("Criando pedido para o cpf  %s", cpf));
         PedidoNumberGenerator generator = new PedidoNumberGeneratorImpl();
         String numeroPedido = generator.generateNumber();
 
@@ -43,15 +52,27 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
             .dataAtualizacao(LocalDateTime.now())
             .build();
 
+        atLog(log)
+            .withData(classe, pedido)
+            .info("Builder pedido criado");
+
         TechChallengeClientDTO techChallengeClientDTO = clienteService.getClienteByCpf(cpf);
         if (techChallengeClientDTO != null) {
-
+            atLog(log)
+                .withData(classe, techChallengeClientDTO)
+                .info("Antes do mapper");
             PedidoEntity pedidoEntity = modelMapper.map(pedido, PedidoEntity.class);
             pedidoEntity.setCpf(techChallengeClientDTO.getCpf());
+            atLog(log)
+                .withData(classe, pedidoEntity)
+                .info("depois do mapper");
 
             pedidoEntity = pedidoJpaRepository.save(pedidoEntity);
             return modelMapper.map(pedidoEntity, Pedido.class);
         }
+        atLog(log)
+            .withData(classe, pedido)
+            .error("techChallengeClientDTO nulo");
         return null;
     }
 
