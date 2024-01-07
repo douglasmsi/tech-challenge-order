@@ -1,5 +1,6 @@
 package br.com.fiap.postech.fastfood.controller.pedido;
 
+import br.com.fiap.postech.fastfood.controller.dto.CriarPedidoRequest;
 import br.com.fiap.postech.fastfood.controller.dto.UpdatePedidoRequest;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,7 +53,7 @@ public interface PedidoControllerSwagger {
                     @ApiResponse(responseCode = "400", description = "Failed to create the Pedido.")
             }
     )
-    ResponseEntity<Object> createPedido(@RequestBody String cpf);
+    ResponseEntity<Object> createPedido(@RequestBody CriarPedidoRequest cpf);
 
     @Operation(
             summary = "Update Status Pedido",
